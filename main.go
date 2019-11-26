@@ -7,12 +7,13 @@ import (
 	"time"
 
 	"github.com/labstack/echo"
-	middleware "github.com/labstack/echo/middleware"
+	"github.com/labstack/echo/middleware"
 	"github.com/tarm/serial"
 )
 
 var s *socket.Socket
 
+// RequestBody body that receive request
 type RequestBody struct {
 	Name    string `json:"name" form:"name" query:"name"`
 	Command string `json:"command" form:"command" query:"command"`
@@ -43,14 +44,29 @@ func doAction(c echo.Context) error {
 		command[4] = 0x0e
 		command[5] = 0xef
 		command[6] = 0x2a
-	case "maison":
+	case "salon":
 		command[4] = 0x0e
 		command[5] = 0xf2
 		command[6] = 0x98
-	case "alex":
+	case "maison":
+		command[3] = 0x0a
+		command[4] = 0x0e
+		command[5] = 0xe8
+		command[6] = 0x79
+	case "hugo":
+		command[3] = 0x06
+		command[4] = 0x11
+		command[5] = 0xf7
+		command[6] = 0xdb
+	case "alex-door":
 		command[4] = 0x0e
 		command[5] = 0xe9
 		command[6] = 0x78
+	case "alex":
+		command[3] = 0x08
+		command[4] = 0x0e
+		command[5] = 0xee
+		command[6] = 0xca
 	}
 
 	switch u.Command {
@@ -78,7 +94,7 @@ func doAction(c echo.Context) error {
 
 func main() {
 	var err error
-	s, err = socket.InitSocket(&serial.Config{Name: "/dev/serial/by-id/usb-RFXCOM_RFXtrx433_A129KO1K-if00-port0", Baud: 38400})
+	s, err = socket.InitSocket(&serial.Config{Name: "/dev/ttyUSB0", Baud: 38400})
 	if err != nil {
 		panic(err)
 	}
