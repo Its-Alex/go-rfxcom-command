@@ -8,7 +8,7 @@ import (
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	"github.com/tarm/serial"
+	"go.bug.st/serial.v1"
 )
 
 var s *socket.Socket
@@ -84,7 +84,7 @@ func doAction(c echo.Context) error {
 	fmt.Println(u)
 	fmt.Println(command)
 
-	_, err := s.Conn.Write(command)
+	_, err := s.Port.Write(command)
 	if err != nil {
 		panic(err)
 	}
@@ -94,7 +94,8 @@ func doAction(c echo.Context) error {
 
 func main() {
 	var err error
-	s, err = socket.InitSocket(&serial.Config{Name: "/dev/ttyUSB0", Baud: 38400})
+
+	s, err = socket.InitSocket(&serial.Mode{BaudRate: 38400})
 	if err != nil {
 		panic(err)
 	}
