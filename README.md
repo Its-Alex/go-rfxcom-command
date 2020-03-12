@@ -2,6 +2,41 @@
 
 RFXCom lib to control RF devices
 
+## Requirements
+
+- `Go`
+- [`reflex`](https://github.com/cespare/reflex)
+
+```
+$ make deps
+```
+
+## Development
+
+### Build
+
+You can build project
+
+```
+$ make build
+```
+
+#### For nas
+
+You can build project for nas
+
+```
+$ make build-nas
+```
+
+### Watch
+
+You can watch project
+
+```
+$ make watch
+```
+
 ## Deployement on nas
 
 ```
