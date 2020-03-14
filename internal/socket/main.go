@@ -8,11 +8,13 @@ import (
 	serial "go.bug.st/serial.v1"
 )
 
+// Socket is a global socket object
 type Socket struct {
 	Port         serial.Port
 	SerialConfig *serial.Mode
 }
 
+// InitSocket init socket connection
 func InitSocket(config *serial.Mode) (*Socket, error) {
 	var err error
 	var USBPort string
@@ -40,6 +42,7 @@ func InitSocket(config *serial.Mode) (*Socket, error) {
 	return newSocket, nil
 }
 
+// SendReset send a reset command to rfxcom
 func (s *Socket) SendReset() error {
 	_, err := s.Port.Write([]byte{0x0d, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00})
 	if err != nil {
@@ -48,6 +51,7 @@ func (s *Socket) SendReset() error {
 	return nil
 }
 
+// SetMode set rfxcom mode
 func (s *Socket) SetMode(enableBlindsTx bool) error {
 	var b []byte
 	if enableBlindsTx {
@@ -65,6 +69,7 @@ func (s *Socket) SetMode(enableBlindsTx bool) error {
 	return nil
 }
 
+// Read read from socket
 func (s *Socket) Read() ([]byte, error) {
 	buf := make([]byte, 257)
 	for {

@@ -1,13 +1,14 @@
-package main
+package api
 
 import (
 	"fmt"
-	socket "github/It-Alex/go-rfxcom-command/socket"
+	socket "github/It-Alex/go-rfxcom-command/internal/socket"
 	"net/http"
 	"time"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
+	"github.com/spf13/viper"
 	"go.bug.st/serial.v1"
 )
 
@@ -92,7 +93,8 @@ func doAction(c echo.Context) error {
 	return c.JSON(http.StatusOK, u)
 }
 
-func main() {
+// Launch start api
+func Launch() {
 	var err error
 
 	s, err = socket.InitSocket(&serial.Mode{BaudRate: 38400})
@@ -129,5 +131,9 @@ func main() {
 	}()
 
 	// Start server
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start(fmt.Sprintf(
+		"%s:%s",
+		viper.GetString("addr"),
+		viper.GetString("port"),
+	)))
 }
