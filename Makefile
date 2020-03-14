@@ -3,7 +3,7 @@ deps:
 
 build-amd64:
 	mkdir -p bin/linux/amd64
-	GOOS=linux GOARCH=amd64 go build -v -o bin/linux/amd64/rfxcom github/It-Alex/go-rfxcom-command/cmd/rfxcom
+	GOOS=linux GOARCH=amd64 go build -v -o bin/rfxcom github/It-Alex/go-rfxcom-command/cmd/rfxcom
 
 build-arm64:
 	mkdir -p bin/linux/arm64

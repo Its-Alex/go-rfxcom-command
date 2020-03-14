@@ -26,7 +26,7 @@ $ make build
 You can build project for nas
 
 ```
-$ make build-nas
+$ make build-arm64
 ```
 
 ### Watch
