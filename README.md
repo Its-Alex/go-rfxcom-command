@@ -37,6 +37,15 @@ You can watch project
 $ make watch
 ```
 
+## Docker
+
+You can build container for all architecture using
+[buildx](https://docs.docker.com/buildx/working-with-buildx/):
+
+```
+ocker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t itsalex/go-rfxcom --push .
+```
+
 ## Deployement on nas
 
 ```

@@ -1,0 +1,11 @@
+version: 3.7
+services:
+  go-rfxcom:
+    build: .
+    image: itsalex/go-rfxcom:latest
+    restart: always
+    privileged: true
+    ports:
+      - 1323:1323
+    volumes:
+      - /dev:/dev
