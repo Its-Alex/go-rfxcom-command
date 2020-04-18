@@ -51,16 +51,38 @@ Files on nas are in `/volume2/scripts/rfxcom/`. There is two files:
 ```
 #!/usr/bin/env bash
 
-set -e
+set -v
 
 # Enable needed module to use TTY
 sudo insmod /lib/modules/usbserial.ko || true
 sudo insmod /lib/modules/ftdi_sio.ko || true
 
-/volume2/scripts/rfxcom/go-rfxcom-command > /var/log/go-rfxcom-command.log
+/volume2/scripts/rfxcom/go-rfxcom-command
 ```
 
 A service is used to setup launch at startup at `/etc/init/go-rfxcom.conf`.
+
+File service:
+
+```
+author "ItsAlex"
+start on runlevel 2
+stop on runlevel [06]
+
+expect fork
+respawn
+respawn limit 5 10
+
+pre-start script
+    echo "Starting go-rfxcom"
+end script
+
+post-stop script
+    echo "Stopped go-rfxcom"
+end script
+
+exec /volume2/scripts/rfxcom/launch.sh
+```
 
 You can start it:
 
@@ -73,3 +95,5 @@ You can stop it:
 ```
 $ stop go-rfxcom
 ```
+
+You can see logs at `cat /var/log/upstart/go-rfxcom.log`
