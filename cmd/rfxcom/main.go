@@ -10,7 +10,7 @@ import (
 )
 
 func init() {
-	viper.SetEnvPrefix("go_rfxom")
+	viper.SetEnvPrefix("go_rfxcom")
 
 	viper.BindEnv("addr")
 	viper.BindEnv("port")
