@@ -1,10 +1,10 @@
 # go-rfxcom-command
 
-RFXCom lib to control RF devices
+RFXCom lib to control RF devices from my personal NAS.
 
 ## Requirements
 
-- `Go`
+- [`Go`](https://go.dev/)
 - [`reflex`](https://github.com/cespare/reflex)
 
 ```
@@ -15,7 +15,7 @@ $ make deps
 
 ### Build
 
-You can build project
+You can build project:
 
 ```
 $ make build
@@ -23,7 +23,7 @@ $ make build
 
 #### For nas
 
-You can build project for nas
+You can build project for `arm64`:
 
 ```
 $ make build-arm64
@@ -31,7 +31,7 @@ $ make build-arm64
 
 ### Watch
 
-You can watch project
+You can watch project:
 
 ```
 $ make watch
@@ -43,19 +43,19 @@ You can build container for all architecture using
 [buildx](https://docs.docker.com/buildx/working-with-buildx/):
 
 ```
-ocker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t itsalex/go-rfxcom --push .
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t itsalex/go-rfxcom --push .
 ```
 
-## Deployement on nas
+## Deployement on NAS (Synology)
 
 ```
 $ GOOS=linux GOARCH=arm64 go build .
 ```
 
-Files on nas are in `/volume2/scripts/rfxcom/`. There is two files:
+Files on NAS are in `/volume2/scripts/rfxcom/`. There is two files:
 
 - `go-rfxcom-command` programs binary.
-- `launch.sh` script used to setup nas and launch it, it contains:
+- `launch.sh` script used to setup NAS and launch it, it contains:
 
 ```
 #!/usr/bin/env bash
